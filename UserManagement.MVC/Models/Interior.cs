@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace UserManagement.MVC.Models
 {
-    public class News
+    public class Interior
     {
         public int Id { get; set; }
-        public string Text { get; set; }
-
-        public ICollection<Project> Projects { get; set; }
+        public string Interior_name { get; set; }
+        public byte[] InteriorPicture { get; set; }
     }
 }

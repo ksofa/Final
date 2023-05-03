@@ -11,9 +11,15 @@ namespace UserManagement.MVC.Data
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+          : base(options)
         {
         }
+
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<News> News { get; set; }
+        public DbSet<Interior> Interiors { get; set; }
+        public DbSet<Report> Reports { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -53,8 +59,5 @@ namespace UserManagement.MVC.Data
                 entity.ToTable("UserTokens");
             });
         }
-
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<News> News { get; set; }
     }
 }

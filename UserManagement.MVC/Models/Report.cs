@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 
 namespace UserManagement.MVC.Models
 {
-    public class News
+    public class Report
     {
         public int Id { get; set; }
-        public string Text { get; set; }
-
-        public ICollection<Project> Projects { get; set; }
+        public string ReportText { get; set; }
     }
 }
