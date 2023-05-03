@@ -1,43 +1,58 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using UserManagement.MVC.Data;
 using UserManagement.MVC.Models;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace UserManagement.MVC.Controllers
 {
-    [Route("news")]
+    [Route("api/[controller]")]
+    [ApiController]
     public class NewsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private ApplicationDbContext db;
 
-        public NewsController(ApplicationDbContext context)
+        public NewsController(ApplicationDbContext dbContext)
         {
-            _context = context;
+            db = dbContext;
         }
 
+        // GET: api/<NewsController>
         [HttpGet]
-        public object GetNews(int skip, int take)
+        public IEnumerable<News> Get()
         {
-            return _context.News.Skip(skip).Take(take).ToArray();
+            return db.News.ToList();
         }
 
-        [HttpPut]
-        public object CreateNews([FromBody] News news)
+        // GET api/<NewsController>/5
+        [HttpGet("{id}")]
+        public News Get(int id)
         {
-            var newNews = new News()
+            News n = db.News.Find(id);
+            return n;
+        }
+
+        // POST api/<NewsController>
+        [HttpPost]
+        public News Post(News n)
+        {
+            if (n.Id != 0)
             {
-                Text = news.Text
-            };
+                News bdn = db.News.Find(n.Id);
+                bdn.Text = n.Text;
+            }
 
-            _context.News.Add(newNews);
-            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                db.News.Add(n);
+                db.SaveChanges();
+            }
 
-            return newNews;
+            return n;
         }
     }
 }
