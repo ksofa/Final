@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UserManagement.MVC.Models
+namespace UserManagement.MVC.RepModels
 {
-    public class Report
+    public class ReportsViewModel
     {
         public int Id { get; set; }
         public string ReportText { get; set; }
-       // public byte[] ReportPicture { get; set; }
+        //public byte[] ReportPicture { get; set; }
         public DateTime CreatedAt { get; set; }
-        //public int ProjectId { get; set; } 
-        public Project Projects { get; set; }
     }
 }

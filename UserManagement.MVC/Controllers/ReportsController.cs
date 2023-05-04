@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UserManagement.MVC.Data;
 using UserManagement.MVC.Models;
+using UserManagement.MVC.RepModels;
 
 namespace UserManagement.MVC.Controllers
 {
@@ -40,22 +41,29 @@ namespace UserManagement.MVC.Controllers
 
         // POST api/<ProjectController>
         [HttpPost]
-        public Report Post(Report rep)
+        public Report Post(ReportsViewModel v)
         {
-            if (rep.Id != 0)
+            var repo = new Report
             {
-                var bdproj = db.Reports.Find(rep.Id);
+                ReportText = v.ReportText,
+                CreatedAt = v.CreatedAt
+            };
 
-                bdproj.ReportText = rep.ReportText;
+            if (repo.Id != 0)
+            {
+                var bdproj = db.Reports.Find(repo.Id);
+
+                bdproj.ReportText = repo.ReportText;
+                bdproj.CreatedAt = repo.CreatedAt;
             }
 
             if (ModelState.IsValid)
             {
-                db.Reports.Add(rep);
+                db.Reports.Add(repo);
                 db.SaveChanges();
             }
 
-            return rep;
+            return repo;
         }
     }
 }

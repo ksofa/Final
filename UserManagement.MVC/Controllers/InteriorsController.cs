@@ -25,14 +25,14 @@ namespace UserManagement.MVC.Controllers
         [HttpGet]
         public IEnumerable<Interior> Get()
         {
-            return db.Interiors.ToList();
+            return db.Interior.ToList();
         }
 
         // GET api/<InteriorController>/5
         [HttpGet("{id}")]
         public Interior Get(int id)
         {
-            Interior n = db.Interiors.Find(id);
+            Interior n = db.Interior.Find(id);
             return n;
         }
 
@@ -42,13 +42,13 @@ namespace UserManagement.MVC.Controllers
         {
             if (n.Id != 0)
             {
-                Interior bdn = db.Interiors.Find(n.Id);
+                Interior bdn = db.Interior.Find(n.Id);
                 bdn.Interior_name = n.Interior_name;
             }
 
             if (ModelState.IsValid)
             {
-                db.Interiors.Add(n);
+                db.Interior.Add(n);
                 db.SaveChanges();
             }
 

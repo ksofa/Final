@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using UserManagement.MVC.Data;
 using UserManagement.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
+using UserManagement.MVC.RepModels;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -47,17 +48,29 @@ namespace UserManagement.MVC.Controllers
 
         // POST api/<ProjectController>
         [HttpPost]
-        public Project Post(Project project)
+        public Project Post(ProjectViewModel v)
         {
+          
+
+            var project = new Project
+            {
+                ProjectName = v.ProjectName,
+                Price = v.Price,
+                Area=v.Area,
+                Adress=v.Adress,
+                CreatedAt=v.CreatedAt,
+                Status=v.Status
+            };
+
             if (project.Id != 0)
             {
                 var bdproj = db.Projects.Find(project.Id);
 
                 bdproj.Price = project.Price;
                 bdproj.Area = project.Area;
-            } 
+            }
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 db.Projects.Add(project);
                 db.SaveChanges();
