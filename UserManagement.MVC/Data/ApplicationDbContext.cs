@@ -17,9 +17,10 @@ namespace UserManagement.MVC.Data
 
         public DbSet<Project> Projects { get; set; }
         public DbSet<News> News { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Interior> Interior { get; set; }
         public DbSet<Report> Reports { get; set; }
-       // public DbSet<Image> Images { get; set; }
+        public DbSet<ProjectImage> ProjectImages { get; set; }
         // public DbSet<Client> Client { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

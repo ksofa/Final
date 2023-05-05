@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System;
 using System.Linq;
 using UserManagement.MVC.Models.Identity;
+using System.Collections.Generic;
 
 namespace UserManagement.MVC.Controllers
 {
@@ -173,5 +174,20 @@ namespace UserManagement.MVC.Controllers
 
             return Ok();
         }
+        [HttpGet]
+        public IEnumerable<ApplicationUser> Get()
+        {
+            return _context.ApplicationUsers.ToList();
+            //обработчики! 
+        }
+        //// GET: api/<AccountController>
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public IEnumerable<ApplicationUser> Get()
+        //{
+        //    return _context.ApplicationUsers.Select(x => new ApplicationUser { }).ToList();
+        //}
+
+
     }
 }
