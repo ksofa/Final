@@ -17,6 +17,7 @@ namespace UserManagement.MVC.Models
         public int Area { get; set; }
         public string Adress { get; set; }
         public string Status { get; set; }
+      //  public Image Image { get; set; }
        // public byte[] ProjectPicture { get; set; }
        // public byte[] IconId { get; set; }
         public DateTime CreatedAt { get; set; }

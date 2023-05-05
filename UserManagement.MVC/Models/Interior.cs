@@ -8,7 +8,7 @@ namespace UserManagement.MVC.Models
     public class Interior
     {
         public int Id { get; set; }
-        public string Interior_name { get; set; }
-        public byte[] InteriorPicture { get; set; }
+        public string Name { get; set; }
+        //public virtual ICollection<Image> Pictures { get; set; }
     }
 }

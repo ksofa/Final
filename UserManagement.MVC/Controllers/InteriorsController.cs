@@ -36,14 +36,14 @@ namespace UserManagement.MVC.Controllers
             return n;
         }
 
-        // POST api/<NewsController>
+        // POST api/<InteriorController>
         [HttpPost]
         public Interior Post(Interior n)
         {
             if (n.Id != 0)
             {
                 Interior bdn = db.Interior.Find(n.Id);
-                bdn.Interior_name = n.Interior_name;
+                bdn.Name = n.Name;
             }
 
             if (ModelState.IsValid)

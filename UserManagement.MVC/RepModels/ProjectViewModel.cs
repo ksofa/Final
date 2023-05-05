@@ -16,5 +16,7 @@ namespace UserManagement.MVC.RepModels
        // public byte[] ProjectPicture { get; set; }
        // public byte[] IconId { get; set; }
         public DateTime CreatedAt { get; set; }
+
+        //public byte[] Image { get; set; }
     }
 }

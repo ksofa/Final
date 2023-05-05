@@ -19,7 +19,8 @@ namespace UserManagement.MVC.Data
         public DbSet<News> News { get; set; }
         public DbSet<Interior> Interior { get; set; }
         public DbSet<Report> Reports { get; set; }
-       // public DbSet<Client> Client { get; set; }
+       // public DbSet<Image> Images { get; set; }
+        // public DbSet<Client> Client { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -60,6 +61,9 @@ namespace UserManagement.MVC.Data
                 entity.ToTable("UserTokens");
             });
         }
+       // public DbSet<Client> Client { get; set; }
+
+        //public DbSet<UserManagement.MVC.Models.ProjectImage> ProjectImage { get; set; }
 
        
     }

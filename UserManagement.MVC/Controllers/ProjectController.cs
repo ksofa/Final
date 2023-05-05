@@ -10,6 +10,7 @@ using UserManagement.MVC.Data;
 using UserManagement.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using UserManagement.MVC.RepModels;
+using Microsoft.AspNetCore.Http;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -31,9 +32,9 @@ namespace UserManagement.MVC.Controllers
         // GET: api/<ProjectController>
         [HttpGet]
         [AllowAnonymous]
-        public IEnumerable<Project> Get()
+        public IEnumerable<ProjectViewModel> Get()
         {
-            return db.Projects.ToList();
+            return db.Projects.Select(x => new ProjectViewModel { }).ToList();
             //обработчики! 
         }
 
@@ -50,8 +51,6 @@ namespace UserManagement.MVC.Controllers
         [HttpPost]
         public Project Post(ProjectViewModel v)
         {
-          
-
             var project = new Project
             {
                 ProjectName = v.ProjectName,
