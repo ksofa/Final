@@ -22,6 +22,7 @@ namespace UserManagement.MVC.Models
        // public byte[] IconId { get; set; }
         public DateTime CreatedAt { get; set; }
         public ICollection<Report> Reports { get; set; } = new List<Report>();
+        public ApplicationUser ApplicationUsers { get; set; }
         //public Client Clients { get; set; }
     }
 }

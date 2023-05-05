@@ -15,6 +15,7 @@ namespace UserManagement.MVC.Models
         public string MiddleName { get; set; }
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
+        public ICollection<Project> Projects { get; set; } = new List<Project>();
         // public bool IsActive { get; set; }
     }
 }

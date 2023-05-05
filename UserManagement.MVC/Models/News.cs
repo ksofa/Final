@@ -9,6 +9,7 @@ namespace UserManagement.MVC.Models
     {
         public int Id { get; set; }
         public string Text { get; set; }
+        public string Title { get; set; }
       //  public byte[] NewsPicture { get; set; }
        // public byte[] IconId { get; set; }
         public DateTime CreatedAt { get; set; } 

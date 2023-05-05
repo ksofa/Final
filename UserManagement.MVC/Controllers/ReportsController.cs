@@ -46,7 +46,8 @@ namespace UserManagement.MVC.Controllers
             var repo = new Report
             {
                 ReportText = v.ReportText,
-                CreatedAt = v.CreatedAt
+                CreatedAt = v.CreatedAt,
+                Title = v.Title
             };
 
             if (repo.Id != 0)
