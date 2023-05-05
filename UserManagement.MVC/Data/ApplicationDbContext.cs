@@ -21,6 +21,8 @@ namespace UserManagement.MVC.Data
         public DbSet<Interior> Interior { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<ProjectImage> ProjectImages { get; set; }
+        public DbSet<Proposal> Proposals { get; set; }
+        
         // public DbSet<Client> Client { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
