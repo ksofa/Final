@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserManagement.MVC.Data;
 
 namespace UserManagement.MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230506201838_InitialC")]
+    partial class InitialC
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -283,11 +285,8 @@ namespace UserManagement.MVC.Migrations
                     b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ApplicationUserId")
+                    b.Property<string>("ApplicationUsersId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ApplicationUserId1")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Area")
                         .HasColumnType("int");
@@ -304,9 +303,12 @@ namespace UserManagement.MVC.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("ApplicationUsersId");
 
                     b.ToTable("Project");
                 });
@@ -447,11 +449,11 @@ namespace UserManagement.MVC.Migrations
 
             modelBuilder.Entity("UserManagement.MVC.Models.Project", b =>
                 {
-                    b.HasOne("UserManagement.MVC.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("UserManagement.MVC.Models.ApplicationUser", "ApplicationUsers")
                         .WithMany("Projects")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUsersId");
 
-                    b.Navigation("ApplicationUser");
+                    b.Navigation("ApplicationUsers");
                 });
 
             modelBuilder.Entity("UserManagement.MVC.Models.Report", b =>

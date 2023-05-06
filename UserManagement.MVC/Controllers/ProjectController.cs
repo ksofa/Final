@@ -11,6 +11,7 @@ using UserManagement.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using UserManagement.MVC.RepModels;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -29,12 +30,25 @@ namespace UserManagement.MVC.Controllers
             db = dbContext;
         }
 
+        //// GET: api/<ProjectController>
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public IEnumerable<ProjectViewModel> Get()
+        //{
+        //    return db.Projects.Select(x => new ProjectViewModel { }).ToList();
+        //    //обработчики! 
+        //}
+        
         // GET: api/<ProjectController>
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize]
         public IEnumerable<ProjectViewModel> Get()
         {
-            return db.Projects.Select(x => new ProjectViewModel { }).ToList();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var projects = db.Projects.Where(p => p.ApplicationUser.Id == userId).ToList();
+
+            return (IEnumerable<ProjectViewModel>)Ok(projects);
+            // return db.Projects.Select(x => new ProjectViewModel { }).ToList();
             //обработчики! 
         }
 
@@ -51,14 +65,17 @@ namespace UserManagement.MVC.Controllers
         [HttpPost]
         public Project Post(ProjectViewModel v)
         {
+
+            var user = db.ApplicationUsers.FirstOrDefault(u => u.Id == v.ApplicationUserId);
             var project = new Project
             {
                 ProjectName = v.ProjectName,
                 Price = v.Price,
-                Area=v.Area,
-                Adress=v.Adress,
-                CreatedAt=v.CreatedAt,
-                Status=v.Status
+                Area = v.Area,
+                Adress = v.Adress,
+                CreatedAt = v.CreatedAt,
+                Status = v.Status,
+                ApplicationUser = user
             };
 
             if (project.Id != 0)
