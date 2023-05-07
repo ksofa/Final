@@ -16,6 +16,7 @@ namespace UserManagement.MVC.Models
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
         public ICollection<Project> Projects { get; set; } = new List<Project>();
+        public ICollection<Event> Enents { get; set; } = new List<Event>();
         // public bool IsActive { get; set; }
     }
 }

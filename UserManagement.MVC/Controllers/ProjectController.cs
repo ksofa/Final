@@ -36,18 +36,18 @@ namespace UserManagement.MVC.Controllers
         //public IEnumerable<ProjectViewModel> Get()
         //{
         //    return db.Projects.Select(x => new ProjectViewModel { }).ToList();
-        //    //обработчики! 
+        //    //
         //}
-        
+
         // GET: api/<ProjectController>
         [HttpGet]
         [Authorize]
-        public IEnumerable<ProjectViewModel> Get()
+        public IEnumerable<Project> Get()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var projects = db.Projects.Where(p => p.ApplicationUser.Id == userId).ToList();
+            return db.Projects.Where(p => p.ApplicationUser.Id == userId).ToList();
 
-            return (IEnumerable<ProjectViewModel>)Ok(projects);
+           // return (IEnumerable<ProjectViewModel>)projects;
             // return db.Projects.Select(x => new ProjectViewModel { }).ToList();
             //обработчики! 
         }

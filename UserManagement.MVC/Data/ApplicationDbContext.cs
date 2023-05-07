@@ -20,6 +20,7 @@ namespace UserManagement.MVC.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Interior> Interior { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Event> Events { get; set; }
         public DbSet<ProjectImage> ProjectImages { get; set; }
         public DbSet<Proposal> Proposals { get; set; }
         

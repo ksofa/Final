@@ -7,6 +7,8 @@ namespace UserManagement.MVC.Models
 {
     public class Event
     {
-
+        public int Id { get; set; }
+        public DateTime Meeting { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }
