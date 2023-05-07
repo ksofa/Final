@@ -18,7 +18,7 @@ namespace UserManagement.MVC.RepModels
        // public byte[] IconId { get; set; }
         public DateTime CreatedAt { get; set; }
         //public ApplicationUser ApplicationUsers { get; set; }
-        public string ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; } 
         //public byte[] Image { get; set; }
     }
 }

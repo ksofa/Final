@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using UserManagement.MVC.RepModels;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -30,14 +31,14 @@ namespace UserManagement.MVC.Controllers
             db = dbContext;
         }
 
-        //// GET: api/<ProjectController>
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public IEnumerable<ProjectViewModel> Get()
-        //{
-        //    return db.Projects.Select(x => new ProjectViewModel { }).ToList();
-        //    //
-        //}
+        // GET: api/<ProjectController>
+        [HttpGet]
+        [AllowAnonymous]
+        public IEnumerable<ProjectViewModel> GetAll()
+        {
+            return db.Projects.Select(x => new ProjectViewModel { }).ToList();
+            //
+        }
 
         // GET: api/<ProjectController>
         [HttpGet]
@@ -61,6 +62,40 @@ namespace UserManagement.MVC.Controllers
             return proj;
         }
 
+        //// POST api/<ProjectController>
+        //[HttpPost]
+        //public Project Post(ProjectViewModel v)
+        //{
+
+        //    var user = db.ApplicationUsers.FirstOrDefault(u => u.Id == v.ApplicationUserId);
+        //    var project = new Project
+        //    {
+        //        ProjectName = v.ProjectName,
+        //        Price = v.Price,
+        //        Area = v.Area,
+        //        Adress = v.Adress,
+        //        CreatedAt = v.CreatedAt,
+        //        Status = v.Status,
+        //        ApplicationUser = user
+        //    };
+
+        //    if (project.Id != 0)
+        //    {
+        //        var bdproj = db.Projects.Find(project.Id);
+
+        //        bdproj.Price = project.Price;
+        //        bdproj.Area = project.Area;
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Projects.Add(project);
+        //        db.SaveChanges();
+        //    }
+
+        //    return project;
+        //}
+
         // POST api/<ProjectController>
         [HttpPost]
         public Project Post(ProjectViewModel v)
@@ -75,7 +110,7 @@ namespace UserManagement.MVC.Controllers
                 Adress = v.Adress,
                 CreatedAt = v.CreatedAt,
                 Status = v.Status,
-                ApplicationUser = user
+                ApplicationUserId = user.Id
             };
 
             if (project.Id != 0)

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +31,24 @@ namespace UserManagement.MVC.Controllers
             return db.Reports.ToList();
             //обработчики! 
         }
+        //// GET: api/<ReportController>
+        //[HttpGet]
+        //[Authorize]
+        //public IEnumerable<Report> GetReportbyProjectId (int id)
+        //{
+
+        //    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        //    //var w =  db.Projects.Where(p => p.ApplicationUser.Id == userId);
+
+
+        //    //foreach (var item in w)
+        //    //{
+        //    //   var b = item.Reports.ToList();
+        //    //}
+        //    // return (IEnumerable<ProjectViewModel>)projects;
+        //    // return db.Projects.Select(x => new ProjectViewModel { }).ToList();
+        //    //обработчики! 
+        //}
 
         // GET api/<ReportController>/5
         [HttpGet("{id}")]

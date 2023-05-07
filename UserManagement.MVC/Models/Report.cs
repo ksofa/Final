@@ -12,7 +12,7 @@ namespace UserManagement.MVC.Models
         public string ReportText { get; set; }
        // public byte[] ReportPicture { get; set; }
         public DateTime CreatedAt { get; set; }
-        //public int ProjectId { get; set; } 
+        public string ProjectsId { get; set; } 
         public Project Projects { get; set; }
     }
 }

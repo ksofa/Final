@@ -23,7 +23,9 @@ namespace UserManagement.MVC.Models
         public DateTime CreatedAt { get; set; }
         [JsonIgnore]
         public ICollection<Report> Reports { get; set; } = new List<Report>();
+        [JsonIgnore]
         public ApplicationUser ApplicationUser { get; set; }
+        [JsonIgnore]
         public string ApplicationUserId { get; set; } 
 
     }
