@@ -66,33 +66,7 @@ namespace UserManagement.MVC.Controllers
         [HttpPost]
         public Report Post(ReportsViewModel v)
         {
-            //var user = db.ApplicationUsers.FirstOrDefault(u => u.Id == v.ApplicationUserId);
-            //var project = new Project
-            //{
-            //    ProjectName = v.ProjectName,
-            //    Price = v.Price,
-            //    Area = v.Area,
-            //    Adress = v.Adress,
-            //    CreatedAt = v.CreatedAt,
-            //    Status = v.Status,
-            //    ApplicationUserId = user.Id
-            //};
-
-            //if (project.Id != 0)
-            //{
-            //    var bdproj = db.Projects.Find(project.Id);
-
-            //    bdproj.Price = project.Price;
-            //    bdproj.Area = project.Area;
-            //}
-
-            //if (ModelState.IsValid)
-            //{
-            //    db.Projects.Add(project);
-            //    db.SaveChanges();
-            //}
-
-            //return project;
+            
             var project = db.Projects.FirstOrDefault(u => u.Id == v.ProjectsId);
             var repo = new Report
             {
