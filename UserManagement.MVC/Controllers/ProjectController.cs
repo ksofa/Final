@@ -31,13 +31,13 @@ namespace UserManagement.MVC.Controllers
             db = dbContext;
         }
 
-        // GET: api/<ProjectController>
-        [HttpGet]
+        // GET: api/<ProjectController("admin")>
+        [HttpGet("admin")]
         [AllowAnonymous]
-        public IEnumerable<ProjectViewModel> GetAll()
+        public IEnumerable<ProjectViewModel> GetAdmin()
         {
             return db.Projects.Select(x => new ProjectViewModel { }).ToList();
-            //
+  
         }
 
         // GET: api/<ProjectController>
