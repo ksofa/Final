@@ -16,8 +16,9 @@ namespace UserManagement.MVC.Models
         [Key]
         public int Id { get; set; }
         public string ProjectName { get; set; }
-        public int Price { get; set; }
-        public int Area { get; set; }
+        public uint Price { get; set; }
+        public uint Area { get; set; }
+        public string TypeProject { get; set; }
         public string Adress { get; set; }
         public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -25,7 +26,6 @@ namespace UserManagement.MVC.Models
         public ICollection<Report> Reports { get; set; } = new List<Report>();
         [JsonIgnore]
         public ApplicationUser ApplicationUser { get; set; }
-        [JsonIgnore]
         public string ApplicationUserId { get; set; } 
 
     }

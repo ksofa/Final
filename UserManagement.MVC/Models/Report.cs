@@ -13,7 +13,6 @@ namespace UserManagement.MVC.Models
         public string ReportText { get; set; }
        // public byte[] ReportPicture { get; set; }
         public DateTime CreatedAt { get; set; }
-        [JsonIgnore]
         public int ProjectsId { get; set; }
         [JsonIgnore]
         public Project Projects { get; set; }

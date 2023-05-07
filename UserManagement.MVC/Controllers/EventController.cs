@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using UserManagement.MVC.Data;
 using UserManagement.MVC.Models;
+using UserManagement.MVC.RepModels;
 
 namespace UserManagement.MVC.Controllers
 {
@@ -15,50 +16,52 @@ namespace UserManagement.MVC.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
-  
-            private ApplicationDbContext db;
 
-            public EventController(ApplicationDbContext dbContext)
-            {
-                db = dbContext;
-            }
+        private ApplicationDbContext db;
 
-        //// GET: api/<EventController>
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public IEnumerable<ProjectViewModel> Get()
-        //{
-        //    return db.Projects.Select(x => new ProjectViewModel { }).ToList();
-        //    //
-        //}
+        public EventController(ApplicationDbContext dbContext)
+        {
+            db = dbContext;
+        }
 
-        //// GET: api/<EventController>
-        //[HttpGet]
-        //    [Authorize]
-        //    public IEnumerable<Event> Get()
-        //    {
-        //        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        //        return db.Events.Where(p => p.ApplicationUser.Id == userId).ToList();
+        // GET: api/<EventController>
+        [HttpGet("admin")]
+        [AllowAnonymous]
+        public IEnumerable<Event> Get()
+        {
+            return db.Events.ToList();
+            //
+        }
 
-        //        // return (IEnumerable<ProjectViewModel>)projects;
-        //        // return db.Projects.Select(x => new ProjectViewModel { }).ToList();
-        //        //обработчики! 
-        //    }
+
+        // GET: api/<EventController>
+        [HttpGet]
+        [Authorize]
+        public IEnumerable<Event> GetEvents()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return db.Events.Where(p => p.ApplicationUser.Id == userId).ToList();
+        }
 
         // GET api/<EventController>/5
         [HttpGet("{id}")]
-            public Event Get(int id)
-            {
-            Event ev = db.Events.Find(id);
-                // throw new Exception("не найден пользователь");
-                return ev;
-            }
-
-        // POST api/<ProjectController>
-        [HttpPost]
-        public Event Post(Event v)
+        public Event Get(int id)
         {
+            Event ev = db.Events.Find(id);
+            return ev;
+        }
 
+        // POST api/<EventController>
+        [HttpPost]
+        public Event Post(EventRepModel v)
+        {
+            var user = db.ApplicationUsers.FirstOrDefault(u => u.Id == v.ApplicationUserId);
+            var ev = new Event
+            {
+                TitleMeeting = v.TitleMeeting,
+                Meeting = v.Meeting,
+                ApplicationUserId = user.Id
+            };
             if (v.Id != 0)
             {
                 var bdproj = db.Events.Find(v.Id);
@@ -68,11 +71,11 @@ namespace UserManagement.MVC.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Events.Add(v);
+                db.Events.Add(ev);
                 db.SaveChanges();
             }
 
-            return v;
+            return ev;
         }
     }
 }

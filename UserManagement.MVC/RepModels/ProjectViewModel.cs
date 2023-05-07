@@ -10,8 +10,8 @@ namespace UserManagement.MVC.RepModels
     {
         public int Id { get; set; }
         public string ProjectName { get; set; }
-        public int Price { get; set; }
-        public int Area { get; set; }
+        public uint Price { get; set; }
+        public uint Area { get; set; }
         public string Adress { get; set; }
         public string Status { get; set; } = "Preparing";
        // public byte[] ProjectPicture { get; set; }

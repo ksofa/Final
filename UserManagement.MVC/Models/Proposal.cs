@@ -13,8 +13,8 @@ namespace UserManagement.MVC.Models
         public string Number { get; set; }
         public string ProjectName { get; set; }
         public string TypeProject { get; set; }
-        public uint TotalArea { get; set; }
-        public uint Budget { get; set; }
+        public uint Area { get; set; }
+        public uint Price { get; set; }
         public string City { get; set; }
     }
 }

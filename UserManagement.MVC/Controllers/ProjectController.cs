@@ -34,9 +34,9 @@ namespace UserManagement.MVC.Controllers
         // GET: api/<ProjectController("admin")>
         [HttpGet("admin")]
         [AllowAnonymous]
-        public IEnumerable<ProjectViewModel> GetAdmin()
+        public IEnumerable<Project> GetAdmin()
         {
-            return db.Projects.Select(x => new ProjectViewModel { }).ToList();
+            return db.Projects.ToList();
   
         }
 

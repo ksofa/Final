@@ -38,19 +38,9 @@ namespace UserManagement.MVC.Controllers
         {
 
              var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            //var user = db.ApplicationUsers.FirstOrDefault(u => u.Id == v.ApplicationUserId);
-            //var w =  db.Projects.Where(p => p.ApplicationUser.Id == userId);
-           // var project = db.Projects.FindAsync(id);
-            //   var project = db.Projects.Include(p => p.Reports).FirstOrDefaultAsync(p => p.Id == id && p.ApplicationUserId == userId);
-            //foreach (var item in w)
-            //{
-            //   var b = item.Reports.ToList();
-            //}
-           // return
+           
             return db.Reports.Where(r => r.ProjectsId == id).ToList();
-            // return (IEnumerable<ProjectViewModel>)projects;
-            // return db.Projects.Select(x => new ProjectViewModel { }).ToList();
-            //обработчики! 
+            
         }
 
         //// GET api/<ReportController>/5
