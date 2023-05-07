@@ -10,7 +10,8 @@ namespace UserManagement.MVC.RepModels
         public int Id { get; set; }
         public string Title { get; set; }
         public string ReportText { get; set; }
-        //public byte[] ReportPicture { get; set; }
+        // public byte[] ReportPicture { get; set; }
         public DateTime CreatedAt { get; set; }
+        public int ProjectsId { get; set; }
     }
 }

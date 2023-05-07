@@ -21,7 +21,7 @@ namespace UserManagement.MVC.Models
         public string Adress { get; set; }
         public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public ICollection<Report> Reports { get; set; } = new List<Report>();
         [JsonIgnore]
         public ApplicationUser ApplicationUser { get; set; }
