@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Grpc.Core;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting.Internal;
@@ -26,20 +27,19 @@ namespace UserManagement.MVC.Controllers
             hostingEnviroment = hosting;
         }
 
-        //[Route("upload/interior")]
-        //[HttpPost]
-        //public void UploadInteriorImages(int interoirId)
-        //{
-        //    var images = UploadImage();
+        [HttpGet("{id}")]
+        public ActionResult GetImage(int id)
+        {
+            ProjectImage proj = db.ProjectImages.Find(id);
+            if (proj == null)
+            {
+                throw new Exception("not found");
+            }
+            byte[] b = System.IO.File.ReadAllBytes(proj.ImagePath);
+            return File(b, "image/jpeg");
+        }
+      
 
-        //    var interoir = db.Interior.Find(interoirId);
-        //    foreach (var image in images)
-        //    {
-        //        interoir.Pictures.Add(image);
-        //    }
-
-        //    db.SaveChanges();
-        //}
         [HttpPost]
         public ActionResult<string> UploadImage()
         {
@@ -51,7 +51,7 @@ namespace UserManagement.MVC.Controllers
                     foreach (var file in files)
                     {
                         FileInfo fi = new FileInfo(file.FileName);
-                        var newfilename = "Image_" + DateTime.Now.TimeOfDay.Milliseconds + fi.Extension;
+                        var newfilename = fi.Extension;
                         var path = Path.Combine("", hostingEnviroment.ContentRootPath + "\\Images\\" + newfilename);
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
@@ -78,7 +78,7 @@ namespace UserManagement.MVC.Controllers
 
         // GET: api/<InteriorController>
         [HttpGet]
-        public ActionResult<List<ProjectImage>> GetProjectImage(int id)
+        public ActionResult<List<ProjectImage>> GetProjectImage()
         {
             var res = db.ProjectImages.ToList();
             return res;
@@ -91,6 +91,20 @@ namespace UserManagement.MVC.Controllers
             //result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
 
             //return result;
+        }
+        // DELETE api/<ProjectImage>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            ProjectImage proj = db.ProjectImages.Find(id);
+            if (proj == null)
+            {
+                throw new Exception("not found");
+            }
+            db.ProjectImages.Remove(proj);
+            db.SaveChanges();
+            // throw new Exception("не найден пользователь");
+            //return proj;
         }
     }
 }

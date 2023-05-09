@@ -12,6 +12,6 @@ namespace UserManagement.MVC.Models
         public string Title { get; set; }
       //  public byte[] NewsPicture { get; set; }
        // public byte[] IconId { get; set; }
-        public DateTime CreatedAt { get; set; } 
+        public string CreatedAt { get; set; } 
     }
 }

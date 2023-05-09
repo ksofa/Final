@@ -35,7 +35,20 @@ namespace UserManagement.MVC.Controllers
             News n = db.News.Find(id);
             return n;
         }
-
+        // DELETE api/<NewsController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            News proj = db.News.Find(id);
+            if (proj == null)
+            {
+                throw new Exception("not found");
+            }
+            db.News.Remove(proj);
+            db.SaveChanges();
+            // throw new Exception("не найден пользователь");
+            //return proj;
+        }
         // POST api/<NewsController>
         [HttpPost]
         public News Post(News n)
@@ -54,5 +67,6 @@ namespace UserManagement.MVC.Controllers
 
             return n;
         }
+        
     }
 }

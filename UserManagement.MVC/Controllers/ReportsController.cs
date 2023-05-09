@@ -14,6 +14,7 @@ using UserManagement.MVC.RepModels;
 namespace UserManagement.MVC.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class ReportsController : Controller
     {
@@ -47,11 +48,24 @@ namespace UserManagement.MVC.Controllers
         //[HttpGet("{id}")]
         //public Report Get(int id)
         //{
-        //    Report proj = db.Reports.Find(id);
+        //    Report proj = db.Reports.Find(id); 
         //    // throw new Exception("не найден пользователь");
         //    return proj;
         //}
-
+        // DELETE api/<ReportController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            Report proj = db.Reports.Find(id);
+            if (proj == null)
+            {
+                throw new Exception("not found");
+            }
+            db.Reports.Remove(proj);
+            db.SaveChanges();
+            // throw new Exception("не найден пользователь");
+            //return proj;
+        }
         // POST api/<ReportController>
         [HttpPost]
         public Report Post(ReportsViewModel v)

@@ -21,7 +21,7 @@ namespace UserManagement.MVC.Models
         public string TypeProject { get; set; }
         public string Adress { get; set; }
         public string Status { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
         //[JsonIgnore]
         public ICollection<Report> Reports { get; set; } = new List<Report>();
         [JsonIgnore]

@@ -21,7 +21,7 @@ namespace UserManagement.MVC.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ProjectController : Controller
     {
         private ApplicationDbContext db;
@@ -33,7 +33,6 @@ namespace UserManagement.MVC.Controllers
 
         // GET: api/<ProjectController("admin")>
         [HttpGet("admin")]
-        [AllowAnonymous]
         public IEnumerable<Project> GetAdmin()
         {
             return db.Projects.ToList();
@@ -42,7 +41,6 @@ namespace UserManagement.MVC.Controllers
 
         // GET: api/<ProjectController>
         [HttpGet]
-        [Authorize]
         public IEnumerable<Project> Get()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -62,39 +60,22 @@ namespace UserManagement.MVC.Controllers
             return proj;
         }
 
-        //// POST api/<ProjectController>
-        //[HttpPost]
-        //public Project Post(ProjectViewModel v)
-        //{
-
-        //    var user = db.ApplicationUsers.FirstOrDefault(u => u.Id == v.ApplicationUserId);
-        //    var project = new Project
-        //    {
-        //        ProjectName = v.ProjectName,
-        //        Price = v.Price,
-        //        Area = v.Area,
-        //        Adress = v.Adress,
-        //        CreatedAt = v.CreatedAt,
-        //        Status = v.Status,
-        //        ApplicationUser = user
-        //    };
-
-        //    if (project.Id != 0)
-        //    {
-        //        var bdproj = db.Projects.Find(project.Id);
-
-        //        bdproj.Price = project.Price;
-        //        bdproj.Area = project.Area;
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Projects.Add(project);
-        //        db.SaveChanges();
-        //    }
-
-        //    return project;
-        //}
+        // DELETE api/<ProjectController>/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            Project proj = db.Projects.Find(id);
+            if (proj == null)
+            {
+                //throw new Exception("not found");
+                return NotFound();
+            }
+            db.Projects.Remove(proj);
+            db.SaveChanges();
+            return Ok();
+            // throw new Exception("не найден пользователь");
+            //return proj;
+        }
 
         // POST api/<ProjectController>
         [HttpPost]
@@ -110,6 +91,7 @@ namespace UserManagement.MVC.Controllers
                 Adress = v.Adress,
                 CreatedAt = v.CreatedAt,
                 Status = v.Status,
+                TypeProject = v.TypeProject,
                 ApplicationUserId = user.Id
             };
 

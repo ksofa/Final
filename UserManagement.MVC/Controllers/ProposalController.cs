@@ -26,6 +26,20 @@ namespace UserManagement.MVC.Controllers
         {
             return db.Proposals.ToList();
         }
+        // DELETE api/<ProposalController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            Proposal proj = db.Proposals.Find(id);
+            if (proj == null)
+            {
+                throw new Exception("not found");
+            }
+            db.Proposals.Remove(proj);
+            db.SaveChanges();
+            // throw new Exception("не найден пользователь");
+            //return proj;
+        }
 
         // GET api/<ProposalController>/5
         [HttpGet("{id}")]

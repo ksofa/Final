@@ -34,5 +34,6 @@ namespace UserManagement.MVC.Models.Identity
 
         [Display(Name = "Отчество")]
         public string? MiddleName { get; set; }
+
     }
 }

@@ -14,7 +14,7 @@ namespace UserManagement.MVC.Models
     {
         public int Id { get; set; }
         public string TitleMeeting { get; set; }
-        public DateTime Meeting { get; set; }
+        public string Meeting { get; set; }
         [JsonIgnore]
         public ApplicationUser ApplicationUser { get; set; }
         public string ApplicationUserId { get; set; }

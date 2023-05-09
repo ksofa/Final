@@ -13,6 +13,7 @@ using UserManagement.MVC.RepModels;
 namespace UserManagement.MVC.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class EventController : ControllerBase
     {
@@ -30,9 +31,7 @@ namespace UserManagement.MVC.Controllers
         public IEnumerable<Event> Get()
         {
             return db.Events.ToList();
-            //
         }
-
 
         // GET: api/<EventController>
         [HttpGet]
@@ -50,17 +49,31 @@ namespace UserManagement.MVC.Controllers
             Event ev = db.Events.Find(id);
             return ev;
         }
-
+        // DELETE api/<EventController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            Event proj = db.Events.Find(id);
+            if (proj == null)
+            {
+                throw new Exception("not found");
+            }
+            db.Events.Remove(proj);
+            db.SaveChanges();
+            // throw new Exception("не найден пользователь");
+            //return proj;
+        }
         // POST api/<EventController>
         [HttpPost]
+        [Authorize]
         public Event Post(EventRepModel v)
         {
-            var user = db.ApplicationUsers.FirstOrDefault(u => u.Id == v.ApplicationUserId);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var ev = new Event
             {
                 TitleMeeting = v.TitleMeeting,
                 Meeting = v.Meeting,
-                ApplicationUserId = user.Id
+                ApplicationUserId = userId
             };
             if (v.Id != 0)
             {
