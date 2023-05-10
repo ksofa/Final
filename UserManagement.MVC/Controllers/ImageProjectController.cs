@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using UserManagement.MVC.Data;
 using UserManagement.MVC.Models;
+using UserManagement.MVC.RepModels;
 
 namespace UserManagement.MVC.Controllers
 {
@@ -41,7 +42,7 @@ namespace UserManagement.MVC.Controllers
       
 
         [HttpPost]
-        public ActionResult<string> UploadImage(int n)
+        public ActionResult<string> UploadImage(ImageView n)
         {
             try
             {
@@ -57,9 +58,15 @@ namespace UserManagement.MVC.Controllers
                         {
                             file.CopyTo(stream);
                         }
-                        var imageupload = new ProjectImage();
+                        var project = db.Projects.FirstOrDefault(u => u.Id == n.ProjectsId);
+                        var imageupload = new ProjectImage
+                        {
+                            ProjectsId = project.Id
+                        };
                         imageupload.ImagePath = path;
-                        imageupload.ProjectsId = n;
+                       // var imageupload = new ProjectImage();
+                       // imageupload.ImagePath = path;
+                       //imageupload.ProjectsId = n;
                         db.ProjectImages.Add(imageupload);
                         db.SaveChanges();
                     }
