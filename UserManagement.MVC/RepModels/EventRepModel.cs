@@ -8,8 +8,8 @@ namespace UserManagement.MVC.RepModels
     public class EventRepModel
     {
         public int Id { get; set; }
-        public string TitleMeeting { get; set; }
-        public string Meeting { get; set; }
-        public string ApplicationUserId { get; set; }
+        public string Title { get; set; }
+        public string Date { get; set; }
+        //public string ApplicationUserId { get; set; }
     }
 }

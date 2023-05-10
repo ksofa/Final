@@ -69,18 +69,19 @@ namespace UserManagement.MVC.Controllers
         public Event Post(EventRepModel v)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-           // var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            // var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var ev = new Event
             {
-                TitleMeeting = v.TitleMeeting,
-                Meeting = v.Meeting,
+                Title = v.Title,
+                Date = v.Date,
                 ApplicationUserId = userId
+               // ApplicationUserId = userId
             };
             if (v.Id != 0)
             {
                 var bdproj = db.Events.Find(v.Id);
 
-                bdproj.Meeting = v.Meeting;
+                bdproj.Date = v.Date;
             }
 
             if (ModelState.IsValid)

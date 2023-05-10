@@ -41,7 +41,7 @@ namespace UserManagement.MVC.Controllers
       
 
         [HttpPost]
-        public ActionResult<string> UploadImage()
+        public ActionResult<string> UploadImage(int n)
         {
             try
             {
@@ -51,15 +51,15 @@ namespace UserManagement.MVC.Controllers
                     foreach (var file in files)
                     {
                         FileInfo fi = new FileInfo(file.FileName);
-                        var newfilename = fi.Extension;
+                        var newfilename =DateTime.Now.TimeOfDay.Milliseconds +fi.Extension;
                         var path = Path.Combine("", hostingEnviroment.ContentRootPath + "\\Images\\" + newfilename);
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             file.CopyTo(stream);
                         }
-                        ProjectImage imageupload = new ProjectImage();
+                        var imageupload = new ProjectImage();
                         imageupload.ImagePath = path;
-                        imageupload.CreatedAt = DateTime.Now;
+                        imageupload.ProjectsId = n;
                         db.ProjectImages.Add(imageupload);
                         db.SaveChanges();
                     }

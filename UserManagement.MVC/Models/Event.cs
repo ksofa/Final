@@ -13,8 +13,8 @@ namespace UserManagement.MVC.Models
     public class Event
     {
         public int Id { get; set; }
-        public string TitleMeeting { get; set; }
-        public string Meeting { get; set; }
+        public string Title { get; set; }
+        public string Date { get; set; }
         [JsonIgnore]
         public ApplicationUser ApplicationUser { get; set; }
         public string ApplicationUserId { get; set; }
