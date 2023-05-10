@@ -90,6 +90,7 @@ namespace UserManagement.MVC.Controllers
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
+                UserName = request.Email
             };
             var result = await _userManager.CreateAsync(user, request.Password);
 

@@ -69,6 +69,7 @@ namespace UserManagement.MVC.Controllers
         public Event Post(EventRepModel v)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+           // var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var ev = new Event
             {
                 TitleMeeting = v.TitleMeeting,
