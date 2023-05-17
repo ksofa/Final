@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using UserManagement.MVC.Data;
 using UserManagement.MVC.Models;
 using UserManagement.MVC.RepModels;
@@ -75,7 +72,7 @@ namespace UserManagement.MVC.Controllers
             var repo = new Report
             {
                 ReportText = v.ReportText,
-                CreatedAt = v.CreatedAt,
+                CreatedAt = DateTime.UtcNow.ToString(),
                 Title = v.Title,
                 ProjectsId = project.Id
             };

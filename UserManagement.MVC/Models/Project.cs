@@ -24,7 +24,7 @@ namespace UserManagement.MVC.Models
         public string CreatedAt { get; set; }
         //[JsonIgnore]
         public ICollection<Report> Reports { get; set; } = new List<Report>();
-        public ICollection<ProjectImage> ProjectImages { get; set; } = new List<ProjectImage>();
+        //public ICollection<ProjectImage> ProjectImages { get; set; } = new List<ProjectImage>();
         [JsonIgnore]
         public ApplicationUser ApplicationUser { get; set; }
         public string ApplicationUserId { get; set; } 

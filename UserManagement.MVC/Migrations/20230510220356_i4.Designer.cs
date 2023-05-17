@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserManagement.MVC.Data;
 
 namespace UserManagement.MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230510220356_i4")]
+    partial class i4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -334,6 +336,26 @@ namespace UserManagement.MVC.Migrations
                     b.ToTable("Project");
                 });
 
+            modelBuilder.Entity("UserManagement.MVC.Models.ProjectImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProjectsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectsId");
+
+                    b.ToTable("ProjectImages");
+                });
+
             modelBuilder.Entity("UserManagement.MVC.Models.Proposal", b =>
                 {
                     b.Property<int>("Id")
@@ -465,6 +487,15 @@ namespace UserManagement.MVC.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
+            modelBuilder.Entity("UserManagement.MVC.Models.ProjectImage", b =>
+                {
+                    b.HasOne("UserManagement.MVC.Models.Project", "Projects")
+                        .WithMany("ProjectImages")
+                        .HasForeignKey("ProjectsId");
+
+                    b.Navigation("Projects");
+                });
+
             modelBuilder.Entity("UserManagement.MVC.Models.Report", b =>
                 {
                     b.HasOne("UserManagement.MVC.Models.Project", "Projects")
@@ -485,6 +516,8 @@ namespace UserManagement.MVC.Migrations
 
             modelBuilder.Entity("UserManagement.MVC.Models.Project", b =>
                 {
+                    b.Navigation("ProjectImages");
+
                     b.Navigation("Reports");
                 });
 #pragma warning restore 612, 618

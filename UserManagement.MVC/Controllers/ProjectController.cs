@@ -83,33 +83,40 @@ namespace UserManagement.MVC.Controllers
         {
 
             var user = db.ApplicationUsers.FirstOrDefault(u => u.Id == v.ApplicationUserId);
-            var project = new Project
+            if (v.Id != 0)
             {
-                ProjectName = v.ProjectName,
-                Price = v.Price,
-                Area = v.Area,
-                Adress = v.Adress,
-                CreatedAt = v.CreatedAt,
-                Status = v.Status,
-                TypeProject = v.TypeProject,
-                ApplicationUserId = user.Id
-            };
+                var bdproj = db.Projects.Find(v.Id);
 
-            if (project.Id != 0)
-            {
-                var bdproj = db.Projects.Find(project.Id);
-
-                bdproj.Price = project.Price;
-                bdproj.Area = project.Area;
-            }
-
-            if (ModelState.IsValid)
-            {
-                db.Projects.Add(project);
+                bdproj.Price = v.Price;
+                bdproj.Area = v.Area;
+                bdproj.Status = v.Status;
                 db.SaveChanges();
+                return bdproj;
             }
+            else
+            {
+                var project = new Project
+                {
+                    ProjectName = v.ProjectName,
+                    Price = v.Price,
+                    Area = v.Area,
+                    Adress = v.Adress,
+                    CreatedAt = v.CreatedAt,
+                    Status = v.Status,
+                    TypeProject = v.TypeProject,
+                    ApplicationUserId = user.Id
+                };
 
-            return project;
+
+
+                if (ModelState.IsValid)
+                {
+                    db.Projects.Add(project);
+                    db.SaveChanges();
+                }
+
+                return project;
+            }
         }
     }
 }
